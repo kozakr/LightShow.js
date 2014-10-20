@@ -1,4 +1,4 @@
 LightShow.js
 ============
 
-A lightweight slideshow for jQuery
+A lightweight slideshow for jQuery.
