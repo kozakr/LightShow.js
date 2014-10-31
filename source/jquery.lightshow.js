@@ -1,5 +1,5 @@
 /*
- * LightShow.js v0.3
+ * LightShow.js v0.4
  * http://romankozak.cz 
  *
  * Copyright (c) 2014 Roman Kozák
@@ -10,13 +10,14 @@
   $.fn.lightshow = function(options) {
 
     var settings = $.extend({
-      autoplay  : true,    // (boolean) animate automatically 
-      pause     : true,    // (boolean) pause on hover 
-      duration  : 3000,    // (integer) single slide duration, in milliseconds 
-      animation : 500,     // (integer) animation duration, in milliseconds
-      transition: "fade",  //  (string) transition between slides 
-      controls  : true,    // (boolean) show controls 
-      title     : false    // (boolean) show title from 'data-title' attribute of <li>
+      autoplay     : true,    // (boolean) animate automatically 
+      pause        : true,    // (boolean) pause on hover 
+      duration     : 3000,    // (integer) single slide duration, in milliseconds 
+      animation    : 500,     // (integer) animation duration, in milliseconds
+      transition   : "fade",  // (string)  transition between slides 
+      controls     : true,    // (boolean) show controls 
+      big_controls : false,   // (boolean) big controls - half of an image
+      title        : false    // (boolean) show title from 'data-title' attribute of <li>
     }, options);
 
     this.each(function() {
@@ -54,13 +55,28 @@
 
       // controls
       if(settings.controls) {
+        var sirka = $this.find("li").outerWidth();
+        var vyska = $this.find("li").outerHeight();
+
         var next = $("<div/>", { class: "lightshow-next" }).appendTo($this);
         var prev = $("<div/>", { class: "lightshow-prev" }).appendTo($this);
-        var top = ($this.find("li").outerHeight()/2 - 30) + "px";
+        
+        var top = (vyska/2 - 30) + "px";
         if(top > 0)
         {
           next.css("top", top);
           prev.css("top", top);
+        }
+
+        if(settings.big_controls)
+        {
+          var css = { 
+            height: vyska + "px",
+            width: (sirka/2)-20 + "px"
+          }
+
+          next.addClass("lightshow-big").css(css);
+          prev.addClass("lightshow-big").css(css);
         }
 
         next.click(function() {

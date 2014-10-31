@@ -64,17 +64,35 @@
     background-image: url("next.png");
   }
 
-  .lightshow-wrapper:hover .lightshow-prev,
-  .lightshow-wrapper:hover .lightshow-next
+    .lightshow-wrapper .lightshow-prev.lightshow-big,
+    .lightshow-wrapper .lightshow-next.lightshow-big
+    {
+      top: 0;
+      cursor: pointer;
+      background: transparent;
+    }
+
+  .lightshow-wrapper .lightshow-prev.lightshow-big
   {
-    opacity: .6;
+    left: 0;
   }
 
-  .lightshow-wrapper .lightshow-prev:hover,
-  .lightshow-wrapper .lightshow-next:hover
+  .lightshow-wrapper .lightshow-next.lightshow-big
   {
-    opacity: 1;
+    right: 0;
   }
+
+    .lightshow-wrapper:hover .lightshow-prev,
+    .lightshow-wrapper:hover .lightshow-next
+    {
+      opacity: .6;
+    }
+
+    .lightshow-wrapper .lightshow-prev:hover,
+    .lightshow-wrapper .lightshow-next:hover
+    {
+      opacity: 1;
+    }
 
   .lightshow-wrapper .lightshow-title
   {
@@ -92,6 +110,7 @@
     .lightshow-wrapper:hover .lightshow-title
     {
       opacity: 1;
+      z-index: 10;
     }
 
 
