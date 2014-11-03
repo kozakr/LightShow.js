@@ -1,6 +1,6 @@
 $(document).ready(function() {
   
-  $('.comics').lightshow({
+  $('.lightshow').lightshow({
       autoplay     : true,    // (boolean) animate automatically 
       pause        : true,    // (boolean) pause on hover 
       duration     : 2000,    // (integer) single slide duration, in milliseconds 
