@@ -17,6 +17,7 @@
       transition   : "fade",  // (string)  transition between slides 
       controls     : true,    // (boolean) show controls 
       big_controls : false,   // (boolean) big controls - half of an image
+      responsive   : false,   // (boolean) LightShow is responsive by default, but sometimes big controls aren't as big as they should be - this corrects them
       title        : false,   // (boolean) show title from 'data-title' attribute of <li>
       change_url   : false    // (boolean) put current slide number into url
     }, options);
@@ -70,10 +71,10 @@
       // controls
       if(settings.controls) {
         var sirka = $this.find("li").outerWidth();
-        if(sirka > 0)
-          sirka = (sirka/2)-20 + "px";
-        else
+        if(settings.responsive || !(sirka > 0))
           sirka = "50%";
+        else
+          sirka = (sirka/2)-20 + "px";
         var vyska = $this.find("li").outerHeight();
 
         var button_next = $("<div/>", { class: "lightshow-next" }).appendTo($this);
