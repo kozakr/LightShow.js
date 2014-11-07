@@ -1,5 +1,5 @@
 /*
- * LightShow.js v0.5-beta
+ * LightShow.js v0.6-beta
  * http://romankozak.cz 
  *
  * Copyright (c) 2014 Roman Kozák
@@ -10,16 +10,22 @@
   $.fn.lightshow = function(options) {
 
     var settings = $.extend({
-      autoplay     : true,    // (boolean) animate automatically 
-      pause        : true,    // (boolean) pause on hover 
-      duration     : 3000,    // (integer) single slide duration, in milliseconds 
-      animation    : 500,     // (integer) animation duration, in milliseconds
-      transition   : "fade",  // (string)  transition between slides 
-      controls     : true,    // (boolean) show controls 
-      big_controls : false,   // (boolean) big controls - half of an image
-      responsive   : false,   // (boolean) LightShow is responsive by default, but sometimes big controls aren't as big as they should be - this corrects them
-      title        : false,   // (boolean) show title from 'data-title' attribute of <li>
-      change_url   : false    // (boolean) put current slide number into url
+      autoplay        : true,    // (boolean) animate automatically 
+      pause           : true,    // (boolean) pause on hover 
+      duration        : 3000,    // (integer) single slide duration, in milliseconds 
+      animation       : 500,     // (integer) animation duration, in milliseconds
+      transition      : "fade",  // (string)  transition between slides (fade, slide)
+      controls        : true,    // (boolean) show controls 
+      big_controls    : false,   // (boolean) big controls - half of an image
+      title           : false,   // (boolean) show title from 'data-title' attribute of <li>
+      change_url      : false,   // (boolean) put current slide number into url
+
+      responsive      : false,   // (boolean) LightShow is responsive by default, but sometimes big controls aren't as big as they should be - this corrects them
+      different_sizes : false,   // (boolean) set to true if your slides have different sizes (fixes transitions between them)
+
+      after_autoplay  : function() {}, // callback function after slide is changed by autoplay
+      after_next      : function() {}, // callback function after next button is clicked
+      after_prev      : function() {} // callback function after prev button is clicked
     }, options);
 
     this.each(function(index) {
@@ -54,6 +60,10 @@
               case "fade":
                 first
                   .fadeOut(settings.animation);
+                if(settings.different_sizes)
+                  next.fadeIn(settings.animation);
+                else
+                  next.show();
                 break;
               case "slide":
                 first
@@ -61,9 +71,11 @@
                 next.css("left", "100%").show().animate({ left: "0" }, settings.animation);
                 break;
             }
-            next.show();
             first.appendTo(content);
-            if(settings.change_url) window.location.hash = "#slide" + next.data('index');
+            if(settings.change_url) 
+              window.location.hash = "#slide" + next.data('index');
+            if(typeof options.after_autoplay == 'function')
+              options.after_autoplay.call(this);
           }
         }, settings.duration);
       }
@@ -109,16 +121,22 @@
               case "fade":
                 first
                   .fadeOut(settings.animation);
+                if(settings.different_sizes)
+                  next.fadeIn(settings.animation);
+                else
+                  next.show();
                 break;
               case "slide":
                 first
-                  .animate({ left: "-100%" }, settings.animation, function() { $(this).css("left", "0").hide(); })
-                  .next('li').css("left", "100%").show().animate({ left: "0" }, settings.animation);
+                  .animate({ left: "-100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
+                 next.css("left", "100%").show().animate({ left: "0" }, settings.animation);
                 break;
             }
-            next.show();
             first.appendTo(content);
-            if(settings.change_url) window.location.hash = "#slide" + next.data('index');
+            if(settings.change_url) 
+              window.location.hash = "#slide" + next.data('index');
+            if(typeof options.after_next == 'function')
+              options.after_next.call(this);
           }
         });
 
@@ -133,15 +151,22 @@
               case "fade":
                 first
                   .fadeOut(settings.animation);
+                if(settings.different_sizes)
+                  prev.fadeIn(settings.animation);
+                else
+                  prev.show();
                 break;
               case "slide":
                 first
                   .animate({ left: "100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
-                  content.find('li:last-child').css("left", "-100%").show().animate({ left: "0" }, settings.animation);
+                prev.css("left", "-100%").show().animate({ left: "0" }, settings.animation);
                 break;
             }
-            prev.show().prependTo(content);
-            if(settings.change_url) window.location.hash = "#slide" + prev.data('index');
+            prev.prependTo(content);
+            if(settings.change_url) 
+              window.location.hash = "#slide" + prev.data('index');
+            if(typeof options.after_prev == 'function')
+              options.after_prev.call(this);
           }
         });
       }
