@@ -22,7 +22,6 @@
     }, options);
 
     this.each(function(index) {
-        console.log(index);
       var $this = $(this);
 
       var content = $this.find('ul');
@@ -71,6 +70,10 @@
       // controls
       if(settings.controls) {
         var sirka = $this.find("li").outerWidth();
+        if(sirka > 0)
+          sirka = (sirka/2)-20 + "px";
+        else
+          sirka = "50%";
         var vyska = $this.find("li").outerHeight();
 
         var button_next = $("<div/>", { class: "lightshow-next" }).appendTo($this);
@@ -87,7 +90,7 @@
         {
           var css = { 
             height: vyska + "px",
-            width: (sirka/2)-20 + "px"
+            width: sirka
           }
 
           button_next.addClass("lightshow-big").css(css);
