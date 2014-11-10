@@ -29,6 +29,62 @@
       after_prev      : function() {} // callback function after prev button is clicked
     }, options);
 
+    function button_next_click(content) {
+      if(!content.find('li').is(':animated'))
+      {
+        var first = content.find('li:first-child');
+        var next = first.next('li');
+
+        switch(settings.transition)
+        {
+          case "fade":
+            first
+              .fadeOut(settings.animation);
+            if(settings.different_sizes)
+              next.fadeIn(settings.animation);
+            else
+              next.show();
+            break;
+          case "slide":
+            first
+              .animate({ left: "-100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
+             next.css("left", "100%").show().animate({ left: "0" }, settings.animation);
+            break;
+        }
+        first.appendTo(content);
+        if(settings.change_url) 
+          window.location.hash = "#slide" + next.data('index');
+      }
+    }
+
+    function button_prev_click(content) {
+      if(!content.find('li').is(':animated'))
+      {
+        var first = content.find('li:first-child');
+        var prev = content.find('li:last-child');
+
+        switch(settings.transition)
+        {
+          case "fade":
+            first
+              .fadeOut(settings.animation);
+            if(settings.different_sizes)
+              prev.fadeIn(settings.animation);
+            else
+              prev.show();
+            break;
+          case "slide":
+            first
+              .animate({ left: "100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
+            prev.css("left", "-100%").show().animate({ left: "0" }, settings.animation);
+            break;
+        }
+        prev.prependTo(content);
+        if(settings.change_url) 
+          window.location.hash = "#slide" + prev.data('index');
+      }
+    }
+
     this.each(function(index) {
       var $this = $(this);
 
@@ -40,6 +96,8 @@
       lis.each(function(index) {
         $(this).data("index", index);
       });
+
+
 
       if(settings.change_url){
         var i = window.location.hash.substr(6);
@@ -53,28 +111,9 @@
       if(settings.autoplay) {
         settings.duration += settings.animation;
         setInterval(function() { 
-          if(!(settings.pause && $this.is(':hover'))) {
-            var first = content.find('li:first-child');
-            var next = first.next('li');
-
-            switch(settings.transition) {
-              case "fade":
-                first
-                  .fadeOut(settings.animation);
-                if(settings.different_sizes)
-                  next.fadeIn(settings.animation);
-                else
-                  next.show();
-                break;
-              case "slide":
-                first
-                  .animate({ left: "-100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
-                next.css("left", "100%").show().animate({ left: "0" }, settings.animation);
-                break;
-            }
-            first.appendTo(content);
-            if(settings.change_url) 
-              window.location.hash = "#slide" + next.data('index');
+          if(!(settings.pause && $this.is(':hover'))) 
+          {
+            button_next_click(content);
             if(typeof options.after_autoplay == 'function')
               options.after_autoplay.call(this);
           }
@@ -112,63 +151,15 @@
         }
 
         button_next.click(function() {
-          if(!content.find('li').is(':animated'))
-          {
-            var first = content.find('li:first-child');
-            var next = first.next('li');
-
-            switch(settings.transition)
-            {
-              case "fade":
-                first
-                  .fadeOut(settings.animation);
-                if(settings.different_sizes)
-                  next.fadeIn(settings.animation);
-                else
-                  next.show();
-                break;
-              case "slide":
-                first
-                  .animate({ left: "-100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
-                 next.css("left", "100%").show().animate({ left: "0" }, settings.animation);
-                break;
-            }
-            first.appendTo(content);
-            if(settings.change_url) 
-              window.location.hash = "#slide" + next.data('index');
-            if(typeof options.after_next == 'function')
-              options.after_next.call(this);
-          }
+          button_next_click(content);
+          if(typeof options.after_next == 'function')
+            options.after_next.call(this);
         });
 
         button_prev.click(function() {
-          if(!content.find('li').is(':animated'))
-          {
-            var first = content.find('li:first-child');
-            var prev = content.find('li:last-child');
-
-            switch(settings.transition)
-            {
-              case "fade":
-                first
-                  .fadeOut(settings.animation);
-                if(settings.different_sizes)
-                  prev.fadeIn(settings.animation);
-                else
-                  prev.show();
-                break;
-              case "slide":
-                first
-                  .animate({ left: "100%" }, settings.animation, function() { $(this).css("left", "0").hide(); });
-                prev.css("left", "-100%").show().animate({ left: "0" }, settings.animation);
-                break;
-            }
-            prev.prependTo(content);
-            if(settings.change_url) 
-              window.location.hash = "#slide" + prev.data('index');
-            if(typeof options.after_prev == 'function')
-              options.after_prev.call(this);
-          }
+          button_prev_click(content);
+          if(typeof options.after_prev == 'function')
+            options.after_prev.call(this);
         });
       }
 
@@ -176,12 +167,16 @@
       {
         $(document).keydown(function(e) {
           switch(e.which) {
-              case 37:
-                button_prev.click();
+              case 39: 
+                button_next_click(content);
+                if(typeof options.after_prev == 'function')
+                  options.after_prev.call(this);
                 break;
 
-              case 39: 
-                button_next.click();
+              case 37:
+                button_prev_click(content);
+                if(typeof options.after_next == 'function')
+                  options.after_next.call(this);
                 break;
 
               default: 
