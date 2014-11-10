@@ -1,5 +1,5 @@
 /*
- * LightShow.js v0.6-beta
+ * LightShow.js v0.7-beta
  * http://romankozak.cz 
  *
  * Copyright (c) 2014 Roman Kozák
@@ -19,6 +19,7 @@
       big_controls    : false,   // (boolean) big controls - half of an image
       title           : false,   // (boolean) show title from 'data-title' attribute of <li>
       change_url      : false,   // (boolean) put current slide number into url
+      keyboard        : false,   // (boolean) enables keyboard navigation - left and right arrow
 
       responsive      : false,   // (boolean) LightShow is responsive by default, but sometimes big controls aren't as big as they should be - this corrects them
       different_sizes : false,   // (boolean) set to true if your slides have different sizes (fixes transitions between them)
@@ -84,9 +85,9 @@
       if(settings.controls) {
         var sirka = $this.find("li").outerWidth();
         if(settings.responsive || !(sirka > 0))
-          sirka = "50%";
+          sirka = "40%";
         else
-          sirka = (sirka/2)-20 + "px";
+          sirka = (sirka/2)-30 + "px";
         var vyska = $this.find("li").outerHeight();
 
         var button_next = $("<div/>", { class: "lightshow-next" }).appendTo($this);
@@ -168,6 +169,25 @@
             if(typeof options.after_prev == 'function')
               options.after_prev.call(this);
           }
+        });
+      }
+
+      if(settings.keyboard)
+      {
+        $(document).keydown(function(e) {
+          switch(e.which) {
+              case 37:
+                button_prev.click();
+                break;
+
+              case 39: 
+                button_next.click();
+                break;
+
+              default: 
+                return;
+          }
+          e.preventDefault();
         });
       }
 
