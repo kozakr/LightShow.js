@@ -12,6 +12,7 @@ Then add these two lines into ```<head>``` of your page.
 <link href="css/jquery.lightshow.css" rel="stylesheet">
 ```
 
+## Usage
 Your slideshow has to have this structure.
 ```html
 <div class="my-slideshow">
@@ -27,7 +28,47 @@ Your slideshow has to have this structure.
 ```
 There can be anything in the ```<li>...</li>```, not just a single image.
 
-The only thing left to do is trigering the LightShow. This will run it with default settings.
-```jquery
-$('.lightshow').lightshow();
+The only thing left to do is triggering the LightShow. This will run it with default settings.
+```js
+$(document).ready(function() {
+	$('.lightshow').lightshow();
+});
+```
+
+## Options
+LightShow comes with few options.
+```js
+$(document).ready(function() {
+	$('.lightshow').lightshow({
+		autoplay        : true,    // (boolean) animate automatically 
+		pause           : true,    // (boolean) pause on hover 
+		duration        : 3000,    // (integer) single slide duration, in milliseconds 
+		animation       : 500,     // (integer) animation duration, in milliseconds
+		transition      : "fade",  // (string)  transition between slides (fade, slide)
+		controls        : true,    // (boolean) show controls 
+		big_controls    : false,   // (boolean) big controls - half of an image
+		circles         : true,    // (boolean) jumping between slides using little circles below LightShow
+		title           : false,   // (boolean) show title from 'data-title' attribute of <li>
+		change_url      : false,   // (boolean) put current slide number into url
+		keyboard        : false,   // (boolean) enables keyboard navigation - left and right arrow
+
+		responsive      : false,   // (boolean) LightShow is responsive by default, but sometimes big controls aren't as big as they should be - this corrects them
+		different_sizes : false,   // (boolean) set to true if your slides have different sizes (fixes transitions between them)
+
+		after_autoplay  : function() {}, // callback function after slide is changed by autoplay
+		after_next      : function() {}, // callback function after next button is clicked
+		after_prev      : function() {} // callback function after prev button is clicked
+	});
+});
+```
+
+## Troubleshooting
+### Responsive design
+If your encounter problems with the size of LightShow on responsive site, trigger it after page is fully loaded like this.
+```js
+$(window).load(function() {
+	$('.lightshow').lightshow();
+});
+
+Also, it may be necessary to ```responsive``` option to ```true```.
 ```
