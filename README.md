@@ -36,7 +36,7 @@ $(document).ready(function() {
 ```
 
 ## Options
-LightShow comes with few options.
+LightShow comes with several options. These are their default values.
 ```js
 $(document).ready(function() {
 	$('.lightshow').lightshow({
