@@ -64,7 +64,7 @@ $(document).ready(function() {
 
 ## Troubleshooting
 ### Responsive design
-If your encounter problems with the size of LightShow on responsive site, trigger it after page is fully loaded like this.
+If your encounter problems with the size of LightShow on a responsive website, trigger it after page is fully loaded like this.
 ```js
 $(window).load(function() {
 	$('.lightshow').lightshow();
