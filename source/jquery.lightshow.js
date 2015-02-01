@@ -1,5 +1,5 @@
 /*
- * LightShow.js v0.7.1-beta
+ * LightShow.js v0.7.4-beta
  * http://romankozak.cz 
  *
  * Copyright (c) 2014 Roman Kozák
