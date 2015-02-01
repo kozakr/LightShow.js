@@ -3,7 +3,7 @@ LightShow.js
 
 A lightweight slideshow for jQuery.
 
-#Instalation
+## Instalation
 
 Just copy files from source folder to your project. Images should be in the same folder as jquery.lightshow.css.
 
