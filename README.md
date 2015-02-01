@@ -31,7 +31,7 @@ There can be anything inside the ```<li>```...```</li>```, not just a single ima
 The only thing left to do is triggering the LightShow. This will run it with default settings.
 ```js
 $(document).ready(function() {
-	$('.lightshow').lightshow();
+	$(".my-slideshow").lightshow();
 });
 ```
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 LightShow comes with several options. These are their default values.
 ```js
 $(document).ready(function() {
-	$('.lightshow').lightshow({
+	$(".my-slideshow").lightshow({
 		autoplay        : true,    // (boolean) animate automatically 
 		pause           : true,    // (boolean) pause on hover 
 		duration        : 3000,    // (integer) single slide duration, in milliseconds 
@@ -67,7 +67,7 @@ $(document).ready(function() {
 If your encounter problems with the size of LightShow on a responsive website, trigger it after page is fully loaded like this.
 ```js
 $(window).load(function() {
-	$('.lightshow').lightshow();
+	$(".my-slideshow").lightshow();
 });
 ```
 
