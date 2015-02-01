@@ -118,8 +118,8 @@
         		setInterval(function() { 
           			if(!(settings.pause && $this.is(':hover'))) {
             			button_next_click(content);
-            			if(typeof options.after_autoplay == 'function')
-              				options.after_autoplay.call(this);
+            			if(typeof settings.after_autoplay == 'function')
+              				settings.after_autoplay.call(this);
           			}
         		}, settings.duration);
       		}
@@ -155,14 +155,14 @@
 
         		button_next.click(function() {
           			button_next_click(content);
-          			if(typeof options.after_next == 'function')
-            			options.after_next.call(this);
+          			if(typeof settings.after_next == 'function')
+            			settings.after_next.call(this);
         		});
 
         		button_prev.click(function() {
           			button_prev_click(content);
-          			if(typeof options.after_prev == 'function')
-            			options.after_prev.call(this);
+          			if(typeof settings.after_prev == 'function')
+            			settings.after_prev.call(this);
         		});
       		}
 
