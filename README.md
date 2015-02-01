@@ -69,6 +69,6 @@ If your encounter problems with the size of LightShow on responsive site, trigge
 $(window).load(function() {
 	$('.lightshow').lightshow();
 });
-
-Also, it may be necessary to ```responsive``` option to ```true```.
 ```
+
+Also, it may be necessary to set the ```responsive``` option to ```true```.
