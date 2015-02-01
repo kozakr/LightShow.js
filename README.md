@@ -71,4 +71,4 @@ $(window).load(function() {
 });
 ```
 
-Also, it may be necessary to set the ```responsive``` option to ```true```.
+Also, it may be necessary to set the ```responsive``` option to ```true``` when using ```big_controls```.
