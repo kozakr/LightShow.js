@@ -26,7 +26,7 @@ Your slideshow has to have this structure.
 	</ul>
 </div>
 ```
-There can be anything in the ```<li>...</li>```, not just a single image.
+There can be anything inside the ```<li>```...```</li>```, not just a single image.
 
 The only thing left to do is triggering the LightShow. This will run it with default settings.
 ```js
