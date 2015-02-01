@@ -6,7 +6,7 @@ A lightweight slideshow for jQuery.
 ## Instalation
 Just copy files from the ```source``` folder into your project. Images should be in the same folder as ```jquery.lightshow.css```.
 
-Then add these two lines into ```<head>``` of your page.
+Then add these two lines into ```<head>``` section of your page.
 ```html
 <script src="js/jquery.lightshow.js"></script>
 <link href="css/jquery.lightshow.css" rel="stylesheet">
