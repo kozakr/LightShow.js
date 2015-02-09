@@ -1,5 +1,5 @@
 /*
- * LightShow.js v0.7.4-beta
+ * LightShow.js v0.8-beta
  * http://romankozak.cz 
  *
  * Copyright (c) 2014 Roman Kozák
@@ -136,8 +136,8 @@
         		
         		var vyska = $this.find("li").outerHeight();
 
-        		var button_next = $("<div/>", { class: "lightshow-next" }).appendTo($this);
-        		var button_prev = $("<div/>", { class: "lightshow-prev" }).appendTo($this);
+        		var button_next = $("<div/>", { "class": "lightshow-next" }).appendTo($this);
+        		var button_prev = $("<div/>", { "class": "lightshow-prev" }).appendTo($this);
         
         		var top = (vyska/2 - 30) + "px";
         		if(top > 0) {
@@ -176,7 +176,7 @@
 /*			
 			// circles - not ready yet
       		if(settings.circles) {
-        		var circles = $("<ul/>", { class: "lightshow-circles" }).appendTo($this);
+        		var circles = $("<ul/>", { "class": "lightshow-circles" }).appendTo($this);
         		var n_of_lis = lis.length;
         		for (var i = 0; i < n_of_lis; i++) {
           			$("<li/>").data("index", i).appendTo(circles);
@@ -223,7 +223,7 @@
         		content.find("li").each(function() {
           			var $this = $(this),
               			title = $this.data("title"),
-          			    title_elem = $("<div/>", { class: "lightshow-title" }).text(title);
+          			    title_elem = $("<div/>", { "class": "lightshow-title" }).text(title);
                 title_elem.appendTo($this);
 
                 if(settings.title_always) {
