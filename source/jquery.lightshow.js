@@ -16,9 +16,11 @@
 	    	animation       : 500,     // (integer) animation duration, in milliseconds
 	    	transition      : "fade",  // (string)  transition between slides (fade, slide)
 	    	controls        : true,    // (boolean) show controls 
+        controls_always : false,   // (boolean) always show controls
 	    	big_controls    : false,   // (boolean) big controls - half of an image
 	    	circles         : true,    // (boolean) jumping between slides using little circles below LightShow
 	    	title           : false,   // (boolean) show title from 'data-title' attribute of <li>
+        title_always    : false,   // (boolean) always show title
 	    	change_url      : false,   // (boolean) put current slide number into url
 	    	keyboard        : false,   // (boolean) enables keyboard navigation - left and right arrow
 
@@ -143,6 +145,11 @@
           			button_prev.css("top", top);
         		}
 
+            if(settings.controls_always && !settings.big_controls) {
+              button_next.addClass("lightshow-always");
+              button_prev.addClass("lightshow-always");
+            }
+
         		if(settings.big_controls) {
           			var css = { 
             			height: vyska + "px",
@@ -215,8 +222,13 @@
       		if(settings.title) {
         		content.find("li").each(function() {
           			var $this = $(this),
-              			title = $this.data("title");
-          			$("<div/>", { class: "lightshow-title" }).text(title).appendTo($this);
+              			title = $this.data("title"),
+          			    title_elem = $("<div/>", { class: "lightshow-title" }).text(title);
+                title_elem.appendTo($this);
+
+                if(settings.title_always) {
+                  title_elem.addClass("lightshow-always");
+                }
         		});
       		}
 
