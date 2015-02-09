@@ -46,9 +46,11 @@ $(document).ready(function() {
 		animation       : 500,     // (integer) animation duration, in milliseconds
 		transition      : "fade",  // (string)  transition between slides (fade, slide)
 		controls        : true,    // (boolean) show controls 
+		controls_always : false,   // (boolean) always show controls
 		big_controls    : false,   // (boolean) big controls - half of an image
 		circles         : true,    // (boolean) jumping between slides using little circles below LightShow
 		title           : false,   // (boolean) show title from 'data-title' attribute of <li>
+		title_always    : false,   // (boolean) always show title
 		change_url      : false,   // (boolean) put current slide number into url
 		keyboard        : false,   // (boolean) enables keyboard navigation - left and right arrow
 
